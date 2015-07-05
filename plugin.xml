@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="com.raphxyz.native.alert"
+        id="com.raphxyz.natif"
         version="0.0.1">
     <name>Alert Plugin</name>
     <description>A plugin to show native alert</description>
@@ -10,7 +10,17 @@
     <repo>https://github.com/raphxyz/native.alert.git</repo>
     <issue>https://github.com/raphxyz/native.alert/issues</issue>
  
-    <js-module src="www/plugin.js" name="Alert">
-        <clobbers target="com.raphxyz.native.alert" />
+    <js-module src="www/plugin.js" name="RaphxyzNatif">
+        <clobbers target="cordova.plugins.Natif" />
     </js-module>
+	
+	<platform name="android">
+	  <config-file target="res/xml/config.xml" parent="/*">
+		<feature name="RaphxyzNatif" >
+		  <param name="android-package" value="com.raphxyz.natif"/>
+		</feature>
+	  </config-file>
+	 
+	  <source-file src="src/android/RaphxyzNatif.java" target-dir="src/com/raphxyz/natif"/>
+	</platform>
 </plugin>
