@@ -1,7 +1,11 @@
 function Plugin(){};
-Plugin.alert = function(content){
-  var onSuccess = function(){};
-  var onFail = function(){};
-  cordova.exec(onSuccess, onFail, 'RaphxyzNatif', 'alert', [content]);
+
+Plugin.alert = function(content, onSuccess, onError){
+  cordova.exec(onSuccess, onError, 'RaphxyzNatif', 'alert', [content]);
 };
+
+Plugin.confirm = function(content, onSuccess, onError){
+  cordova.exec(onSuccess, onError, 'RaphxyzNatif', 'confirm', [content]);
+};
+
 module.exports = Plugin;
