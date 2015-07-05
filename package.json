@@ -1,0 +1,23 @@
+{
+  "name": "RaphxyzNatif",
+  "version": "0.0.1",
+  "description": "Cordova Native Alert",
+  "cordova": {
+    "id": "com.raphxyz.natif",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raphxyz/native.alert.git"
+  },
+  "keywords": [
+    "cordova"
+  ],
+  "peerDependencies": {
+    "com.raphxyz.natif": ">=0.0.1"
+  },
+  "author": "RaphXyZ",
+  "license": "Apache 2.0"
+}
