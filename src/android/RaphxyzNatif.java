@@ -25,26 +25,21 @@ public class RaphxyzNatif extends CordovaPlugin {
 		
 		if(this.cordova.getActivity().isFinishing()) return true;
 		
-		switch(action) {
-			case "alert":
-				alert(args.getString(0), args.getString(1), cbContext);
-				return true;
-				break;
-			
-			case "confirm":
-				confirm(args.getString(0), args.getString(1), cbContext);
-				return true;
-				break;
-			
-			case "promt":
-				promt(args.getString(0), args.getString(1), cbContext);
-				return true;
-				break;
-			
-			default:
-				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
-				return false;
-				break;
+		if("alert".equals(action)){
+			alert(args.getString(0), args.getString(1), cbContext);
+			return true;
+		}
+		else if("confirm".equals(action)) {
+			confirm(args.getString(0), args.getString(1), cbContext);
+			return true;
+		}
+		else if("promt".equals(action)) {
+			promt(args.getString(0), args.getString(1), cbContext);
+			return true;
+		}
+		else {
+			cbContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
+			return false;
 		}
 	}
  
