@@ -95,12 +95,10 @@ public class RaphxyzNatif extends CordovaPlugin {
 			public void onClick(DialogInterface dialog, int id){
 				dialog.dismiss();
 				try {
-					result.put("buttonIndex",1);
+					result.put("cancel",false);
 					result.put("value", promptInput.getText().toString().trim().length()==0 ? "" : promptInput.getText());											
 				} 
-				catch (JSONException e) { 
-					//result = stackTraceToString(e.printStackTrace());
-				}
+				catch (JSONException e) { }
 				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
 			}
 		})
@@ -108,24 +106,13 @@ public class RaphxyzNatif extends CordovaPlugin {
 			public void onClick(DialogInterface dialog, int id){
 				dialog.dismiss();
 				try {
-					result.put("buttonIndex",0);
-					result.put("value", promptInput.getText().toString().trim().length()==0 ? "" : promptInput.getText());
-				} 
-				catch (JSONException e) {
-					//result = stackTraceToString(e.printStackTrace());
+					result.put("cancel",true);
+					result.put("value", null);
 				}
+				catch (JSONException e) { }
 				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
 			}
 		})
 		.show();
     }
-	
-	public String stackTraceToString(Throwable e) {
-		StringBuilder sb = new StringBuilder();
-		for (StackTraceElement element : e.getStackTrace()) {
-			sb.append(element.toString());
-			sb.append("\n");
-		}
-		return sb.toString();
-	}
 }
