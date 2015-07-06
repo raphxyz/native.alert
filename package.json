@@ -1,7 +1,7 @@
 {
   "name": "RaphxyzNatif",
   "version": "0.0.1",
-  "description": "Cordova Native Alert",
+  "description": "Cordova native alert and confirm boxes",
   "cordova": {
     "id": "com.raphxyz.natif",
     "platforms": [

@@ -25,25 +25,33 @@ public class RaphxyzNatif extends CordovaPlugin {
 		
 		if(this.cordova.getActivity().isFinishing()) return true;
 		
-		if("alert".equals(action)){
-			final String content = args.getString(0);
-			alert(content, cbContext);
-			return true;
-		}
-		else if("confirm".equals(action)) {
-			confirm(args.getString(0), cbContext);
-			return true;
-		}
-		else {
-			cbContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
-			return false;
+		switch(action) {
+			case "alert":
+				alert(args.getString(0), args.getString(1), cbContext);
+				return true;
+				break;
+			
+			case "confirm":
+				confirm(args.getString(0), args.getString(1), cbContext);
+				return true;
+				break;
+			
+			case "promt":
+				promt(args.getString(0), args.getString(1), cbContext);
+				return true;
+				break;
+			
+			default:
+				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
+				return false;
+				break;
 		}
 	}
  
-	private synchronized void alert(final String content, final CallbackContext cbContext){
+	private synchronized void alert(final String title, final String content, final CallbackContext cbContext){
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		
-		alertDialog.setTitle("Alert")
+		alertDialog.setTitle(title)
 		.setMessage(content)
 		.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int id){
@@ -54,21 +62,55 @@ public class RaphxyzNatif extends CordovaPlugin {
 		.show();
 	}
 	
-	private synchronized void confirm(final String message, final CallbackContext cbContext) {
+	private synchronized void confirm(final String title, final String message, final CallbackContext cbContext) {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		
-		alertDialog.setTitle("Confirmation")
+		alertDialog.setTitle(title)
 		.setMessage(message)
-		.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
+		.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int id){
 				dialog.dismiss();
 				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, true));
 			}
 		})
-		.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
+		.setNegativeButton(R.string.no, new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int id){
 				dialog.dismiss();
 				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, false));
+			}
+		})
+		.show();
+    }
+	
+	private synchronized void promt(final String title, final String message, final CallbackContext cbContext) {
+		final EditText promptInput =  new EditText(cordova.getActivity());
+		promptInput.setHint("");
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		
+		final JSONObject result = new JSONObject();
+		
+		alertDialog.setTitle(title)
+		.setMessage(message)
+		.setCancelable(true)
+		.setView(promptInput)
+		.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int id){
+				dialog.dismiss();
+				try {
+					result.put("buttonIndex",1);
+					result.put("input1", promptInput.getText().toString().trim().length()==0 ? defaultText : promptInput.getText());											
+				} catch (JSONException e) { e.printStackTrace(); }
+				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
+			}
+		})
+		.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int id){
+				dialog.dismiss();
+				try {
+					result.put("buttonIndex",0);
+					result.put("input1", promptInput.getText().toString().trim().length()==0 ? defaultText : promptInput.getText());
+				} catch (JSONException e) { e.printStackTrace(); }
+				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
 			}
 		})
 		.show();
