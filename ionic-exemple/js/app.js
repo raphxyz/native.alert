@@ -37,7 +37,7 @@ angular.module('starter', ['ionic'])
 					$rootScope.$apply();
 				}
 				else {
-					$rootScope.log = "Vous avez annulé la demande\n";
+					$rootScope.log = "Vous n'avez pas confirmé la demande\n";
 					$rootScope.$apply();
 				}
 			},
@@ -47,14 +47,14 @@ angular.module('starter', ['ionic'])
 			});
 	};
 	$rootScope.showPromt = function(){
-		$window.natif.promt('QUESTION', 'Etes-vous certain de vouloir effectuer cette action ?', 
+		$window.natif.promt('QUESTION', 'Que voulez-vous faire aujourd\'hui ?', 
 			function(result){
-				if(result) {
-					$rootScope.log = result.value+"\n";
+				if(result && result.value) {
+					$rootScope.log = "Mhhh... J'aime faire " + result.value + "\n";
 					$rootScope.$apply();
 				}
 				else {
-					$rootScope.log = "Vous avez annulé la demande\n";
+					$rootScope.log = "Vous avez refusé de répondre à la question\n";
 					$rootScope.$apply();
 				}
 			},
