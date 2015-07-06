@@ -19,7 +19,7 @@ angular.module('starter', ['ionic'])
 	$rootScope.log = "";
 	
 	$rootScope.showAlert = function(){
-		$window.natif.alert('Hello Raph !', 
+		$window.natif.alert('ALERT', 'Hello You !', 
 			function(success){
 				$rootScope.log = "Vous avez cliquez sur le bouton ok de l'alerte\n";
 				$rootScope.$apply();
@@ -30,7 +30,7 @@ angular.module('starter', ['ionic'])
 			});
 	};
 	$rootScope.showConfirm = function(){
-		$window.natif.confirm('Etes-vous certain de vouloir effectuer cette action?', 
+		$window.natif.confirm('CONFIRMATION','Etes-vous certain de vouloir effectuer cette action?', 
 			function(confirmed){
 				if(confirmed) {
 					$rootScope.log = "Vous avez confirmé la demande\n";
@@ -43,6 +43,23 @@ angular.module('starter', ['ionic'])
 			},
 			function(error){
 				$rootScope.log = "Erreur de la boite de confirmation\n";
+				$rootScope.$apply();
+			});
+	};
+	$rootScope.showPromt = function(){
+		$window.natif.promt('QUESTION', 'Etes-vous certain de vouloir effectuer cette action ?', 
+			function(result){
+				if(result) {
+					$rootScope.log = result.value+"\n";
+					$rootScope.$apply();
+				}
+				else {
+					$rootScope.log = "Vous avez annulé la demande\n";
+					$rootScope.$apply();
+				}
+			},
+			function(error){
+				$rootScope.log = JSON.stringify(error);
 				$rootScope.$apply();
 			});
 	};

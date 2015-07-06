@@ -36,7 +36,7 @@ public class RaphxyzNatif extends CordovaPlugin {
 			confirm(args.getString(0), args.getString(1), cbContext);
 			return true;
 		}
-		else if("promt".equals(action)) {
+		else if("prompt".equals(action)) {
 			promt(args.getString(0), args.getString(1), cbContext);
 			return true;
 		}
@@ -96,8 +96,11 @@ public class RaphxyzNatif extends CordovaPlugin {
 				dialog.dismiss();
 				try {
 					result.put("buttonIndex",1);
-					result.put("input1", promptInput.getText().toString().trim().length()==0 ? defaultText : promptInput.getText());											
-				} catch (JSONException e) { e.printStackTrace(); }
+					result.put("value", promptInput.getText().toString().trim().length()==0 ? "" : promptInput.getText());											
+				} 
+				catch (JSONException e) { 
+					//result = stackTraceToString(e.printStackTrace());
+				}
 				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
 			}
 		})
@@ -106,11 +109,23 @@ public class RaphxyzNatif extends CordovaPlugin {
 				dialog.dismiss();
 				try {
 					result.put("buttonIndex",0);
-					result.put("input1", promptInput.getText().toString().trim().length()==0 ? defaultText : promptInput.getText());
-				} catch (JSONException e) { e.printStackTrace(); }
+					result.put("value", promptInput.getText().toString().trim().length()==0 ? "" : promptInput.getText());
+				} 
+				catch (JSONException e) {
+					//result = stackTraceToString(e.printStackTrace());
+				}
 				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
 			}
 		})
 		.show();
     }
+	
+	public String stackTraceToString(Throwable e) {
+		StringBuilder sb = new StringBuilder();
+		for (StackTraceElement element : e.getStackTrace()) {
+			sb.append(element.toString());
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
 }
