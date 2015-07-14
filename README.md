@@ -6,7 +6,7 @@ Descriptions
 -------------
 
 Use natives notifications box. Recive assynchrone response of your confirmation box or your promt box.
-Is so easy to use on a cordova or angularjs and ionic application.
+Is so easy to use on a Cordova applications.
 
 
 Requirements
@@ -56,10 +56,10 @@ Open a native promt box :
 		
 	function onSuccess(result) {
 		if(result) {
-			alert(result.value)
+			console.log(result);
 		}
 		else {
-			alert('Response Cancelled')
+			console.log('Response Cancelled')
 		}
 	}
 	
