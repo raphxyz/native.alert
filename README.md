@@ -19,14 +19,14 @@ Requirements
 Usage
 ------
 
-	Open a native alert:
+Open a native alert :
 
 		natif.alert(
 			'Title Box !', 
 			'Text on the box...'
 		);
     
-	Open a native confirmation request box:
+Open a native confirmation request box :
 		
 		function onSuccess(confirmed) {
 			if(confirmed) {
@@ -48,7 +48,7 @@ Usage
 			onError
 		);
 		
-	Open a native promt box:
+Open a native promt box :
 		
 		function onSuccess(result) {
 			if(result) {
@@ -69,5 +69,6 @@ Usage
 			onSuccess,
 			onError
 		);
-		
+	
+	
 Enjoy.
