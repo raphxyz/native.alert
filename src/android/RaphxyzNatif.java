@@ -6,6 +6,9 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -38,6 +41,10 @@ public class RaphxyzNatif extends CordovaPlugin {
 		}
 		else if("prompt".equals(action)) {
 			promt(args.getString(0), args.getString(1), cbContext);
+			return true;
+		}
+		else if("beep".equals(action)) {
+			beep(args.getString(0));
 			return true;
 		}
 		else {
@@ -114,5 +121,35 @@ public class RaphxyzNatif extends CordovaPlugin {
 			}
 		})
 		.show();
+    }
+	
+	/**
+     * Beep plays the default notification ringtone.
+     *
+     * @param count     Number of times to play notification
+     */
+    private void beep(final String c) {
+		
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                Uri ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone notification = RingtoneManager.getRingtone(cordova.getActivity().getBaseContext(), ringtone);
+				int count = Integer.parseInt(c);
+                // If phone is not set to silent mode
+                if (notification != null) {
+                    for (long i = 0; i < count; ++i) {
+                        notification.play();
+                        long timeout = 5000;
+                        while (notification.isPlaying() && (timeout > 0)) {
+                            timeout = timeout - 100;
+                            try {
+                                Thread.sleep(100);
+                            }
+							catch (InterruptedException e) { }
+                        }
+                    }
+                }
+            }
+        });
     }
 }

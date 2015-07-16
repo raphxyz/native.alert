@@ -9,7 +9,11 @@ var RaphxyzNatif = {
 	},
 	promt: function(title, content, onSuccess, onError){
 		exec(onSuccess, onError, 'RaphxyzNatif', 'prompt', [title, content]);
-	}
+	},
+	beep: function(count) {
+        var defaultedCount = count || 1;
+        exec(null, null, "RaphxyzNatif", "beep", [ defaultedCount ]);
+    }
 };
 
 module.exports = RaphxyzNatif;

@@ -63,6 +63,9 @@ angular.module('starter', ['ionic'])
 				$rootScope.$apply();
 			});
 	};
+	$rootScope.showBeep = function(){
+		$window.natif.beep('2');
+	};
   });
 })
 .controller('MainCtrl', function($scope, $window){
