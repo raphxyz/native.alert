@@ -43,7 +43,7 @@ public class RaphxyzNatif extends CordovaPlugin {
 			promt(args.getString(0), args.getString(1), cbContext);
 			return true;
 		}
-		else if("promtPassword") {
+		else if("promtPassword".equals(action)) {
 			promtPassword(args.getString(0), args.getString(1), cbContext);
 			return true;
 		}
