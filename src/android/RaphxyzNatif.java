@@ -43,6 +43,10 @@ public class RaphxyzNatif extends CordovaPlugin {
 			promt(args.getString(0), args.getString(1), cbContext);
 			return true;
 		}
+		else if("promtPassword") {
+			promtPassword(args.getString(0), args.getString(1), cbContext);
+			return true;
+		}
 		else if("beep".equals(action)) {
 			beep(args.getString(0));
 			return true;
@@ -123,6 +127,42 @@ public class RaphxyzNatif extends CordovaPlugin {
 		.show();
     }
 	
+	private synchronized void promtPassword(final String title, final String message, final CallbackContext cbContext) {
+		final EditText promptInput =  new EditText(cordova.getActivity());
+		promptInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+		promptInput.setHint("");
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		
+		final JSONObject result = new JSONObject();
+		
+		alertDialog.setTitle(title)
+		.setMessage(message)
+		.setCancelable(true)
+		.setView(promptInput)
+		.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int id){
+				dialog.dismiss();
+				try {
+					result.put("cancel",false);
+					result.put("value", promptInput.getText().toString().trim().length()==0 ? "" : promptInput.getText());											
+				} 
+				catch (JSONException e) { }
+				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
+			}
+		})
+		.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int id){
+				dialog.dismiss();
+				try {
+					result.put("cancel",true);
+					result.put("value", null);
+				}
+				catch (JSONException e) { }
+				cbContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
+			}
+		})
+		.show();
+    }
 	/**
      * Beep plays the default notification ringtone.
      *
