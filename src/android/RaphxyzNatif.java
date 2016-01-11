@@ -19,8 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
- 
 public class RaphxyzNatif extends CordovaPlugin {
  
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -59,7 +57,7 @@ public class RaphxyzNatif extends CordovaPlugin {
 	}
  
 	private synchronized void alert(final String title, final String content, final CallbackContext cbContext){
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_HOLO_DARK);
 		
 		alertDialog.setTitle(title)
 		.setMessage(content)
@@ -73,7 +71,7 @@ public class RaphxyzNatif extends CordovaPlugin {
 	}
 	
 	private synchronized void confirm(final String title, final String message, final CallbackContext cbContext) {
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_HOLO_DARK);
 		
 		alertDialog.setTitle(title)
 		.setMessage(message)
@@ -95,7 +93,7 @@ public class RaphxyzNatif extends CordovaPlugin {
 	private synchronized void promt(final String title, final String message, final CallbackContext cbContext) {
 		final EditText promptInput =  new EditText(cordova.getActivity());
 		promptInput.setHint("");
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_HOLO_DARK);
 		
 		final JSONObject result = new JSONObject();
 		
@@ -132,7 +130,7 @@ public class RaphxyzNatif extends CordovaPlugin {
 		final EditText promptInput =  new EditText(cordova.getActivity());
 		promptInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 		promptInput.setHint("");
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_HOLO_DARK);
 		
 		final JSONObject result = new JSONObject();
 		
