@@ -91,7 +91,7 @@ public class RaphxyzNatif extends CordovaPlugin {
     }
 	
 	private synchronized void promt(final String title, final String message, final CallbackContext cbContext) {
-		final EditText promptInput =  new EditText(cordova.getActivity(), null, AlertDialog.THEME_HOLO_DARK);
+		final EditText promptInput =  new EditText(cordova.getActivity(), null, EditText.THEME_HOLO_DARK);
 		promptInput.setHint("");
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_HOLO_DARK);
 		
@@ -127,7 +127,7 @@ public class RaphxyzNatif extends CordovaPlugin {
     }
 	
 	private synchronized void promtPassword(final String title, final String message, final CallbackContext cbContext) {
-		final EditText promptInput =  new EditText(cordova.getActivity(), null, AlertDialog.THEME_HOLO_DARK);
+		final EditText promptInput =  new EditText(cordova.getActivity(), null, EditText.THEME_HOLO_DARK);
 		promptInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 		promptInput.setHint("");
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.cordova.getActivity(), AlertDialog.THEME_HOLO_DARK);
